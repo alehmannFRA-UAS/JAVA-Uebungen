@@ -39,5 +39,5 @@ jobs:
           checkstyle_config: checkstyle.xml
           #checkstyle_version: 10.4
           # workdir: .
-          reporter: github-pr-review
+          reporter: github-check #github-pr-review
           level: warning
