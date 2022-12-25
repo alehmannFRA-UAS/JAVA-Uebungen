@@ -1,5 +1,7 @@
 {
     "java.project.sourcePaths": [
         "src/main/java"
-    ]
+    ],
+    "java.checkstyle.configuration": "checkstyle.xml",
+    "java.checkstyle.version": "9.2"
 }
