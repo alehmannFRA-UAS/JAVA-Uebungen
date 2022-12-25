@@ -30,11 +30,11 @@ jobs:
           java-version: 17
               
       - name: Checkstyle for Java        
-        uses: dbelyaev/action-checkstyle@v0.5.1
+        uses: dbelyaev/action-checkstyle@v0.6.1
         with:
           github_token: ${{ secrets.github_token }}
           checkstyle_config: checkstyle.xml
-          checkstyle_version: 10.4
+          #checkstyle_version: 10.4
           # workdir: .
           reporter: github-pr-review
           level: warning
