@@ -32,9 +32,12 @@ jobs:
           # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
           java-version: 17
               
-      - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
+      - name: Checkstyle for Java        
+      - uses: dbelyaev/action-checkstyle@v0.6.1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: 'github-pr-check'
-          tool_name: 'testtool'
+          github_token: ${{ secrets.github_token }}
+          checkstyle_config: checkstyle.xml
+          checkstyle_version: 10.4
+          # workdir: .
+          reporter: github-pr-review
+          level: warning
