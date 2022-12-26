@@ -26,11 +26,11 @@ jobs:
 
       # Cache for Maven    
       - name: Cache the Maven packages to speed up build
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2   
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven- 
 
       # Build with Maven
       - name: Build project with Maven
@@ -79,7 +79,7 @@ jobs:
 
       - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: Package
           path: staging
