@@ -15,6 +15,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
       # Setup the JAVA JDK
       - name: Setup Java JDK
         uses: actions/setup-java@v3
@@ -22,6 +23,7 @@ jobs:
           distribution: 'temurin'
           # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
           java-version: 17
+
       # Cache for Maven    
       - name: Cache the Maven packages to speed up build
         uses: actions/cache@v1
@@ -29,6 +31,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2   
+
       # Build with Maven
       - name: Build project with Maven
         run: mvn -B package --file pom.xml
@@ -63,15 +66,19 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
+
       # Build with Maven without testing
       - name: Build project with Maven
         run: mvn -B package --file pom.xml -DskipTests
-      - run: mkdir staging  cp target/*jar-withdependencies.jar staging
+
+      - run: mkdir staging && cp target/*jar-withdependencies.jar staging
+      
       - uses: actions/upload-artifact@v1
         with:
           name: Package
