@@ -11,9 +11,11 @@ import org.junit.jupiter.api.Test;
  */
 public class FirstProgramTest {
     
+    private FirstProgram firstProgram;
+
     @BeforeEach                                         
     void setUp() {
-        FirstProgram = new FirstProgram();
+        firstProgram = new FirstProgram();
     }
 
     /**
@@ -22,7 +24,7 @@ public class FirstProgramTest {
     @Test
     @DisplayName("Simple Test for multiply method")
     void testOutestMultiply() {
-        assertEquals(20, calculator.multiply(4, 5), "Regular multiplication should work");
+        assertEquals(20, firstProgram.multiply(4, 5), "Regular multiplication should work");
     }
 
 }
