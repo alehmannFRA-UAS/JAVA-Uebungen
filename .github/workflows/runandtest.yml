@@ -1,5 +1,5 @@
 # This is the basic workflow for testing build and others
-name: CI for Testing and Executing
+name: CI for building and testing project and publish a package
 
 # Controls when the workflow will run
 on:
@@ -57,3 +57,24 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-check' #'github-pr-review'
           tool_name: 'pmd_reviewdog'
+  
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      # Setup the JAVA JDK
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+          java-version: 17
+      # Build with Maven without testing
+      - name: Build project with Maven
+        run: mvn -B package --file pom.xml -DskipTests
+        run: mkdir staging  cp target/*jar-withdependencies.jar staging
+        uses: actions/upload-artifact@v1
+        with:
+          name: Package
+          path: staging
