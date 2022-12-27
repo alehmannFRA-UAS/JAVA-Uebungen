@@ -56,6 +56,16 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco/
+      
+      - name: Remove the generated JaCoCo report from repository
+        run: |
+          if [[ `git status --porcelain`]]; then
+            git config --global user.name 'Github workflow'
+            git config --global user.email 'nowhere@gmail.com' 
+            git rm -r target
+            git commit . -m "Remove duplicated directory"
+            git push
+          fi
     
   testing:
     needs: build
@@ -124,16 +134,16 @@ jobs:
 
       - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
       
-      - name: Deploy JavaDoc 🚀
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: staging
+          
+      - name: Deploy JavaDoc
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
           target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc
-          project: maven # or gradle
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Package
-          path: staging
+          project: maven
