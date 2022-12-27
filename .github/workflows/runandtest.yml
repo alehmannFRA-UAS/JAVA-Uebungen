@@ -60,6 +60,16 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-check' #'github-pr-review'
           tool_name: 'pmd_reviewdog'
+      
+      - name: Build and Run JUNIT Tests
+        run: mvn test --batch-mode --fail-at-end
+      
+      - name: Publish unit test reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: surefire-test-results
+          path: '**/surefire-reports/TEST-*.xml'
   
   publish:
     runs-on: ubuntu-latest
