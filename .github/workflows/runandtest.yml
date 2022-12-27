@@ -42,6 +42,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      
       - name: Setup reviewdog
         uses: reviewdog/action-setup@v1.0.3
               
@@ -60,6 +66,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-check' #'github-pr-review'
           tool_name: 'pmd_reviewdog'
+      
+      - name: Build and Run JUNIT Tests
+        run: mvn test --batch-mode --fail-at-end
+      
+      - name: Publish unit test reports
+        if: ${{ always() }}
+        uses: scacap/action-surefire-report@v1
   
   publish:
     runs-on: ubuntu-latest
