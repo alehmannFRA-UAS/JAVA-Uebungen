@@ -66,10 +66,7 @@ jobs:
       
       - name: Publish unit test reports
         if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: surefire-test-results
-          path: '**/surefire-reports/TEST-*.xml'
+        uses: scacap/action-surefire-report@v1
   
   publish:
     runs-on: ubuntu-latest
