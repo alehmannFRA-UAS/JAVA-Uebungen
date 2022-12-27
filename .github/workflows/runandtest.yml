@@ -123,6 +123,15 @@ jobs:
         run: mvn -B package --file pom.xml -DskipTests
 
       - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
+      
+      - name: Deploy JavaDoc 🚀
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc
+          java-version: 17
+          target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc
+          project: maven # or gradle
 
       - uses: actions/upload-artifact@v3
         with:
