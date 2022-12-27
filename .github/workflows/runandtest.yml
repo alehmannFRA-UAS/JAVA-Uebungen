@@ -59,7 +59,7 @@ jobs:
       
       - name: Remove the generated JaCoCo report from repository
         run: |
-          if [[ `git status --porcelain`]]; then
+          if [[ `git status --porcelain` ]]; then
             git config --global user.name 'Github workflow'
             git config --global user.email 'nowhere@gmail.com' 
             git rm -r target
