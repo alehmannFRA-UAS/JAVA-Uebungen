@@ -3,8 +3,5 @@
         "src/main/java"
     ],
     "java.checkstyle.configuration": "checkstyle.xml",
-    "java.checkstyle.version": "9.2",
-    "java.test.config": {
-    "workingDirectory": "${workspaceFolder}/src/test/java/"
-    }
+    "java.checkstyle.version": "9.2"
 }
