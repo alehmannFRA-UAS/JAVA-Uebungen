@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>edu.fra.uas</groupId>
-    <artifactId>github-action-maven</artifactId>
+    
+    <groupId>edu.fra.uas</groupId>			<!-- a unique base name of the company or group that created the project -->
+    <artifactId>github-action-maven</artifactId>	<!-- a unique name of the project -->
     <version>1.0</version>
 
     <properties>
@@ -64,24 +64,24 @@
                 </dependencies>
             </plugin>
             <plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.8</version>
-				<executions>
-				  <execution>
-					<goals>
-					  <goal>prepare-agent</goal>
-					</goals>
-				  </execution>
-				  <execution>
-					<id>generate-code-coverage-report</id>
-					<phase>test</phase>
-					<goals>
-					  <goal>report</goal>
-					</goals>
-				  </execution>
-				</executions>
-			</plugin>
+	        <groupId>org.jacoco</groupId>
+		<artifactId>jacoco-maven-plugin</artifactId>
+		<version>0.8.8</version>
+		<executions>
+		    <execution>
+		        <goals>
+			    <goal>prepare-agent</goal>
+			</goals>
+		    </execution>
+		    <execution>
+			<id>generate-code-coverage-report</id>
+			<phase>test</phase>
+			<goals>
+			    <goal>report</goal>
+			</goals>
+		    </execution>
+	        </executions>
+	    </plugin>
         </plugins>
     </build>
 
